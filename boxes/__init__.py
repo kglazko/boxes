@@ -20,7 +20,6 @@ import copy
 import datetime
 import gettext
 import math
-import random
 import re
 import sys
 from argparse import ArgumentParser
@@ -38,6 +37,7 @@ from boxes import edges, formats, gears, parts, pulley
 from boxes.Color import *
 from boxes.qrcode_factory import BoxesQrCodeFactory
 from boxes.vectors import kerf
+import secrets
 
 ### Helpers
 
@@ -1677,8 +1677,8 @@ class Boxes:
                 i += 1
                 misses += 1
                 # random new point
-                x = random.randrange(math.floor(min_x + bspace), math.ceil(max_x - bspace)) # randomness takes longer to compute
-                y = random.randrange(math.floor(min_y + bspace), math.ceil(max_y - bspace)) # but generates a new pattern for each run
+                x = secrets.SystemRandom().randrange(math.floor(min_x + bspace), math.ceil(max_x - bspace)) # randomness takes longer to compute
+                y = secrets.SystemRandom().randrange(math.floor(min_y + bspace), math.ceil(max_y - bspace)) # but generates a new pattern for each run
                 pt = Point(x, y).buffer(min_radius + bspace)
                 # check if point is within border
                 if borderPoly.contains(pt):

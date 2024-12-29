@@ -9,6 +9,7 @@ from xml.etree import ElementTree as ET
 from affine import Affine
 
 from boxes.extents import Extents
+import secrets
 
 EPS = 1e-4
 PADDING = 10
@@ -1002,11 +1003,9 @@ class LBRN2Surface(Surface):
         f.seek(0)
         return f
 
-from random import random
-
 
 def random_svg_color():
-    r, g, b = random(), random(), random()
+    r, g, b = secrets.SystemRandom().random(), secrets.SystemRandom().random(), secrets.SystemRandom().random()
     return f"rgb({r*255:.0f},{g*255:.0f},{b*255:.0f})"
 
 

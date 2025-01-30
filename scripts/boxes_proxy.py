@@ -61,8 +61,8 @@ class boxesPyWrapper(GenerateExtension):
             exit(1)
 
         # write the generated SVG into Inkscape's canvas
-        p = etree.XMLParser(huge_tree=True)
-        doc = etree.fromstring(result.stdout, parser=etree.XMLParser(huge_tree=True))
+        p = etree.XMLParser(huge_tree=True, resolve_entities=False)
+        doc = etree.fromstring(result.stdout, parser=etree.XMLParser(huge_tree=True, resolve_entities=False))
         group = inkex.Group(id="boxes.py")
         for element in doc:
             group.append(element)

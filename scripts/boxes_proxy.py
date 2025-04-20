@@ -12,6 +12,8 @@ Last patch: 27.04.2021
 License: GNU GPL v3
 
 """
+from security import safe_command
+
 pass
 import subprocess
 import sys
@@ -52,7 +54,7 @@ class boxesPyWrapper(GenerateExtension):
         cmd = cmd.replace("boxes --generator", "boxes")
 
         # run boxes with the parameters provided
-        result = subprocess.run(cmd.split(), capture_output=True)
+        result = safe_command.run(subprocess.run, cmd.split(), capture_output=True)
 
         if result.returncode:
             inkex.utils.debug("Generating box svg failed.  Cannot continue. Command was:")

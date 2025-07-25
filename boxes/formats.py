@@ -20,6 +20,7 @@ import subprocess
 import tempfile
 
 from boxes.drawing import Context, LBRN2Surface, PSSurface, SVGSurface
+from security import safe_command
 
 
 class Formats:
@@ -93,7 +94,7 @@ class Formats:
                 input=tmpfile,
                 output=outfile).split()
 
-            result = subprocess.run(cmd)
+            result = safe_command.run(subprocess.run, cmd)
             os.unlink(tmpfile)
             if result.returncode:
                 # XXX show stderr output
